@@ -1,0 +1,230 @@
+<html>
+
+<head><script language="JavaScript">
+<!-- Hide
+function WinOpen(url) {
+   msg=open(url,"DisplayWindow","toolbar=yes,directories=no,menubar=no,status=yes");
+}
+     function stat(txt) {
+        window.status = txt;
+        setTimeout("erase()",1500);
+      }
+     function erase() {
+       window.status="";
+     }
+// -->
+</script>
+
+<title>Introdução ao JavaScript - Parte 6</title>
+<style TYPE="text/css">
+<!--
+	A:link {font-weight: bold; text-decoration: none}
+	A:visited {font-weight: bold; text-decoration: none}
+        A:hover { font-weight: bold; color:blue;}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#000000" vlink="#000000" alink="#000000">
+
+<p align="center"><font face="MS Sans Serif" size="1" color="#000000"><strong><a
+name="twoinone"></a> Introdução ao JavaScript</strong><br>
+<img src="Jsd6.gif" width="73" height="65" alt="Parte 6 "></font></p>
+
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+
+<p><font face="MS Sans Serif" size="1" color="#000000"><br>
+<br>
+Eu recebi um montão de mails sobre o problema de como duas páginas podem ser carregadas
+com somente um clique do mouse. Basicamente, existem três soluções diferentes para esse
+problema. A primeira possibilidade é criar um botão que convoque uma função quando o
+usuário o pressionar. Esta função deve carregar duas páginas em frames diferentes ou
+abrir novas janelas. Isto não vai parecer tão difícil se você der uma olhada nos
+exemplos dados nas outras partes desta introdução. Nós já temos aqui tudo o que
+precisamos. </font></p>
+
+<form>
+  <p><font face="MS Sans Serif" size="1" color="#000000"><input type="button" name="Button"
+  value="Pressione aqui!" onclick="WinOpen('frames2.htm')"> </font></p>
+</form>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Nós criamos três frames. O
+primeiro é utilizado para o botão. A primeira página HTML é necessária somente para a
+abertura dos frames e para nomeá-los. Nada disso é novidade, pois nós já usamos esta
+técnica na Parte 3 para trabalhar com frames, mas, de qualquer modo, eu vou fazer a
+demonstração. (Eu não sei se isto acontece com você também, mas toda vez que um autor
+de livros de informática imagina que alguma coisa não precisa ser publicada por ser
+muito fácil, esta é precisamente a parte com a qual ele tem mais problemas; mas, vamos
+lá:) </font></p>
+
+<h3><font face="MS Sans Serif" size="1" color="#000000">frames2.htm </font></h3>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;title&gt;Frames&lt;/title&gt;
+&lt;/HEAD&gt;
+    &lt;FRAMESET COLS=&quot;295,*&quot;&gt; 
+  &lt;FRAMESET ROWS=&quot;100%,*&quot;&gt; 
+    &lt;FRAME SRC=&quot;loadtwo.htm&quot; NAME=&quot;fr1&quot;&gt; 
+      &lt;/FRAMESET&gt; 
+  &lt;FRAMESET ROWS=&quot;75%,25%&quot;&gt; 
+    &lt;FRAME SRC=&quot;cell.htm&quot; NAME=&quot;fr2&quot;&gt; 
+    &lt;FRAME SRC=&quot;cell.htm&quot; NAME=&quot;fr3&quot;&gt; 
+      &lt;/FRAMESET&gt; 
+&lt;/FRAMESET&gt; 
+&lt;/HTML&gt;
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000"><i>loadtwo.htm</i> é carregado no
+primeiro frame. Este é o frame que tem o botão. </font></p>
+
+<h3><font face="MS Sans Serif" size="1" color="#000000">loadtwo.htm </font></h3>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;script language=&quot;JavaScript&quot;&gt;
+&lt;!-- Hiding
+  function loadtwo(page2, page3) {
+     parent.fr2.location.href=page2;
+     parent.fr3.location.href=page3;
+}
+// --&gt;
+&lt;/script&gt;
+&lt;/HEAD&gt;
+&lt;BODY&gt;
+&lt;FORM NAME=&quot;buttons&quot;&gt;
+     &lt;INPUT TYPE=&quot;button&quot; VALUE=&quot;2 em uma linha&quot; onClick=&quot;loadtwo('frtest1.htm','frtest2.htm')&quot;&gt;
+&lt;/FORM&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">A função loadtwo() é convocada
+quando o botão é pressionado. Duas seqüências são colocadas na função. Se você
+olhar na função loadtwo() verá que o segundo frame <i>fr2</i> carrega a página que é
+definida pela primeira seqüência na chamada da função. Se você tiver botões
+diferentes abrindo páginas diferentes, você pode reutilizar esta função. A única
+coisa que se tem que fazer é colocar as URLs (endereços) das diferentes páginas na
+função. </font></p>
+
+<p><font face="MS Sans Serif" size="1" color="#000000"><br>
+A segunda técnica lança mão de hiperlinks. Alguns exemplos navegando pela Internet têm
+alguma coisa parecida com:<br>
+<i>&lt;a href=&quot;yourlink.htm onCLick=&quot;yourfunction()&quot;&gt;</i><br>
+Mas essa técnica aparentemente não funciona em todas as plataformas, assim o melhor é
+não usá-la. Além do mais eu não estou nem seguro de que ela sequer funcione, afinal de
+contas. Mas não temos que nos preocupar com isso porque existe outro método pelo qual
+podemos implementar o que queremos. Nós podemos declarar uma função JavaScript do
+seguinte modo: </font></p>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+&lt;a href=&quot;javascript:myfunction()&quot;&gt;Meu Link&lt;/a&gt;
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Isso é realmente muito fácil e
+parece funcionar bem em todos os browsers. Basta escrever <i>javascript:</i> e&nbsp;em
+seguida o nome da sua função dentro de um link. Se você declarar a função 'loadtwo()'
+do exemplo acima, poderá atualizar dois frames com um único clique do mouse sobre um
+hiperlink. </font></p>
+
+<p><font face="MS Sans Serif" size="1" color="#000000"><br>
+A&nbsp;terceira técnica para carregar duas páginas com um clique de mouse pode ser a
+combinação de dois botões ou de hiperlinks normais. Nós poderíamos fazer isso
+através da segunda técnica demonstrada acima, mas essa abordagem daqui parece ser
+algumas vezes mais apropriada. O&nbsp;que se pode fazer é&nbsp;carregar uma página HTML
+em um frame, assim:<br>
+&lt;a href=&quot;getfr2.htm&quot; target=&quot;fr2&quot;&gt;Clique aqui!&lt;/a&gt;<br>
+Mas nós já conhecemos isto. O&nbsp;que há de novo é o acréscimo da propriedade onLoad
+no arquivo carregado. Por isso o arquivo getfr2.htm ficaria assim: </font></p>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+&lt;HTML&gt;
+&lt;BODY onLoad=&quot;parent.fr3.location.href='getfr3.htm'; return true;&quot;&gt;
+bla bla bla
+&lt;/body&gt;
+&lt;/html&gt;
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Logicamente, você tem que
+acrescentar isso a todos os documentos que forem carregados no segundo frame. </font></p>
+
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Outro problema já visto é o de
+como podem ser carregadas novas páginas em uma nova janela. A janela se abrirá quando o
+usuário clica num link. Você só terá que acrescentar &nbsp;a propriedade target no seu
+tag (descritor) novamente</font><font face="MS Sans Serif" size="1" color="#000000"><a
+href...>. Isso ficaria assim:<br>
+&lt;a href=&quot;vaiondequiser.html&quot; target=&quot;Janela
+Adicional&quot;&gt;Vá!&lt;/a&gt;</a> </font></p>
+
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Agora vamos dar uma olhada nos
+diferentes operadores que podem ser usados no JavaScript. Os Operadores são uma técnica
+poderosa para encurtar e melhorar o seu script. Se você quisesse testar por exemplo se
+uma variável <i>x</i> é maior do que 3 e menor do que 10, você poderia escrever desse
+modo: </font></p>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+if (x&gt;3) 
+  if (x&lt;10)
+    doanything();
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">A função doanything() seria
+convocada se x&gt;3 <i>e</i> x&lt;10. Mas existe um modo mais rápido de se escrever isto:
+</font></p>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+if (x&gt;3 &amp;&amp; x&lt;10) doanything();
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">O &amp;&amp; é chamado de operador
+E. Existe também o operador OU. Você pode usar isso por exemplo, se quiser constatar se
+uma variável <i>x</i> é igual a 5 ou outra variável <i>y</i> é igual a 17: </font></p>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+if (x==5 || y==17) doanything();
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">A função doanything() será
+convocada quando x==5 <i>ou</i> y==17. Ela também será convocada se ambas as
+comparações forem verdadeiras. <br>
+As comparações se fazem através do operador == no JavaScript (Naturalmente também
+existe &lt;,&gt;,&lt;= e &gt;=). Se você conhece C/C++, é a mesma coisa. Um único = é
+usado para armazenar um valor numa variável. (Se você conhece Pascal isso pode parecer
+um pouco confuso, porque assignar valores a variáveis em Pascal se faz através de := e
+comparações através de um único =). Se vopcê quiser ver se uma variável não é
+igual a um certo número, isso pode ficar um pouco complicado sem os operadores. Isto
+poderia ser feito com um único !=. Veja só o exemplo: <i>x != 17</i>. Existem muitos
+outros operadores que podem fazer suas programações de maneira mais eficiente. Dê uma
+olhada na documentação fornecida pela Netscape para ter o panorama completo de todos os
+operadores que se podem usar em JavaScript. <br>
+</font></p>
+
+<h4 align="center"><a href="index.htm"
+onMouseOver="stat('Introdução ao JavaScript - Pagina Principal');return true"><font
+face="MS Sans Serif" size="1" color="#000000">Index</font></a><font face="MS Sans Serif"
+size="1" color="#000000"> - </font><font face="MS Sans Serif" size="1" color="#000000"><a
+href="javascr.htm" onMouseOver="stat('JavaScript - Introdução Parte 1');
+ return true">Parte
+1</a> - </font><font face="MS Sans Serif" size="1" color="#000000"><a href="javascr2.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 2');
+ return true">Parte 2</a> - </font><font
+face="MS Sans Serif" size="1" color="#000000"><a href="javascr3.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 3');
+ return true">Parte 3</a> - </font><font
+face="MS Sans Serif" size="1" color="#000000"><a href="javascr4.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 4');
+ return true">Parte 4</a> - </font><font
+face="MS Sans Serif" size="1" color="#000000"><a href="javascr5.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 5');
+ return true">Parte 5</a> - </font><font
+face="MS Sans Serif" size="1" color="#000000"><a href="javascr7.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 7');
+ return true">Parte 7</a> </font></h4>
+</body>
+</html>

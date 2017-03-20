@@ -1,0 +1,245 @@
+<html>
+
+<head><script language="JavaScript">
+<!-- Hide
+function erase() {
+   window.status="";
+}
+function stat(txt) {
+   window.status = txt;
+   setTimeout("erase()",1500);
+}
+function test(form, button) {
+  if (button.name == "button1") test1(form);
+  if (button.name == "button2") test2(form);
+}
+function test1(form) {
+  if (form.text1.value == "")
+    alert("Coloque alguma informação, por favor!")
+  else { 
+   alert("Olá "+form.text1.value+"! Informação de formulário ok!");
+  }
+}
+function test2(form) {
+  if (form.text2.value == "" || 
+      form.text2.value.indexOf('@', 0) == -1) 
+        alert("Não é um e-mail válido!");
+  else alert("OK!");
+}
+// -->
+</script>
+
+<title>Introdução ao JavaScript - Parte 7</title>
+<style TYPE="text/css">
+<!--
+	A:link {font-weight: bold; text-decoration: none}
+	A:visited {font-weight: bold; text-decoration: none}
+        A:hover { font-weight: bold; color:blue;}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#000000" vlink="#000000" alink="#000000">
+
+<p align="center"><font face="MS Sans Serif" size="1" color="#000000"><strong><a
+name="valforms"></a> Introdução ao JavaScript</strong><br>
+<img src="Jsd7.gif" width="83" height="67" alt="Parte 7"> </font></p>
+
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+
+<p><font face="MS Sans Serif" size="1" color="#000000"><br>
+<br>
+Informações em formulários são muito importantes para algumas páginas web. Muitas
+vezes essas informações colocadas nos formulários são enviadas de volta ao servidor.
+Mas o JavaScript consegue uma funcionalidade para validar as informações postas em
+formulários antes de enviá-la ao servidor. Em primeiro lugar eu quero lhe mostrar como
+se pode validar os formulários. Em seguida nós vamos dar uma olhada nas possibilidades
+de se enviar de volta informações com JavaScript ou HTML. </font></p>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Antes de mais nada, vamos criar um
+script simples. A página HTML terá dois elementos textuais. O usuário deve escrever o
+seu nome no primeiro e um endereço de e-mail no segundo elemento. Mas você pode escrever
+qualquer outra coisa nos elementos de formulário e pressionar o botão. Tente também
+não colocar nada e pressionar o botão. </font></p>
+
+<form name="first">
+  <p><font face="MS Sans Serif" size="1" color="#000000">Escreva o seu nome:<br>
+  <input type="text" name="text1" size="20"> <input type="button" name="button1"
+  value="Teste a Informação" onClick="test1(this.form)"> </font></p>
+  <p><font face="MS Sans Serif" size="1" color="#000000">Escreva o seu e-mail:<br>
+  <input type="text" name="text2" size="20"> <input type="button" name="button2"
+  value="Teste a Informação" onClick="test2(this.form)"> </font></p>
+</form>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">A respeito das informações que se
+pode escrever no primeiro elemento, você vai receber uma mensagem de erro se não entrar
+com nenhum dado (não escrever nada). Qualquer informação escrita é tida como válida.
+É claro que isto não previne que algum usuário coloque o seu nome errado. O browser
+aceita até números. Se você escrever o seu nome como '17' você terá um retorno como
+'Olá 17!'. <br>
+Já o segundo formulário é um pouco mais sofisticado. Tente colocar uma seqüência
+simples - o seu nome, por exemplo. Ele simplesmente não funciona (a não ser que você
+tenha um @ no seu nome...). O critério para que a informação seja aceita como um
+endereço de e-mail válido é o @. Um único @ irá funcionar - mas certamente isto não
+fará muito sentido. O ponto é que todo endereço de correio eletrônico na Internet tem
+um @, e por isso parece ser mais apropriado checar os @s aqui. </font></p>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Qual é a cara dos scripts para a
+validação desses dois elementos de formulário? Ei-los: </font></p>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+&lt;html&gt;
+&lt;head&gt;
+&lt;script language=&quot;JavaScript&quot;&gt;
+&lt;!-- Hide
+
+function test1(form) {
+  if (form.text1.value == &quot;&quot;)
+    alert(&quot;Coloque alguma informação, por favor!&quot;)
+  else { 
+   alert(&quot;Olá &quot;+form.text1.value+&quot;! Informação de fromulário ok!&quot;);
+  }
+}
+
+function test2(form) {
+  if (form.text2.value == &quot;&quot; || 
+      form.text2.value.indexOf('@', 0) == -1) 
+        alert(&quot;Não é um e-mail válido!&quot;);
+  else alert(&quot;OK!&quot;);
+}
+// --&gt;
+&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;form name=&quot;first&quot;&gt;
+Enter your name:&lt;br&gt;
+&lt;input type=&quot;text&quot; name=&quot;text1&quot;&gt;
+&lt;input type=&quot;button&quot; name=&quot;button1&quot; value=&quot;Teste a Informação&quot; onClick=&quot;test1(this.form)&quot;&gt;
+&lt;P&gt;
+Enter your e-mail address:&lt;br&gt;
+&lt;input type=&quot;text&quot; name=&quot;text2&quot;&gt;
+&lt;input type=&quot;button&quot; name=&quot;button2&quot; value=&quot;Teste a Informação&quot; onClick=&quot;test2(this.form)&quot;&gt;
+&lt;/body&gt;
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Primeiro dê uma olhada no código
+HTML da seção body. Nós só criamos dois elementos textuais e dois botões. Os botões
+convocam as funções test1(...) ou test2(...), &nbsp;dependendo de qual deles for
+pressionado. Nós substituímos <i>this.form</i> pelas funções para que pudéssemos
+direcionar os elementos corretos nas funções depois.<br>
+A função test1(form) testa se a seqüência é vazia, o que é feito através de <i>if
+(form.text1.value == &quot;&quot;)...</i> . 'form' é a variável que recebe o valor
+'this.form' na declaração da função. Nós obtemos o valor do elemento colocado como
+dado por meio do uso de 'value' em combinação com <i>form.text1</i>. Para verificarmos
+se a seqüência é vazia nós a comparamos com &quot;&quot;. Se a seqüência colocada
+como dado for igual a &quot;&quot;, então nenhuma informação foi dada. O usuário verá
+uma mensagem de erro. Se alguma coisa for colocada, então o usuário verá um ok.<br>
+O problema aqui é que o usuário pode também colocar espaços vazios como informação.
+E isto é interpretado como um dado válido! Se você quiser, também pode checar essas
+possibilidades e excluí-las, naturalmente. Acho que isso seria muito fácil com os dados
+disponíveis aqui.<br>
+Agora dê uma olhada na função <i>test2(form)</i>. Esta função compara novamente a
+seqüência colocada como dado com a seqüência vazia &quot;&quot; para se assegurar de
+que alguma informação foi dada. Porém nós acrescentamos algo ao comando if. O símbolo
+|| é chamado de operador OU. Você já foi apresentado pra ele na parte 6 desta
+introdução.<br>
+O comando if serve para checar se o primeiro ou o segundo elemento da comparação é o
+verdadeiro. Se pelo menos um deles for verdadeiro, então todo o comando if será
+verdadeiro e o comnado seguinte será executado. Isso significa que você verá uma
+mensagem de erro se a sua seqüência for vazia ou se não existir um @ nela.
+A&nbsp;segunda operação no comando if verifica se a seqüência posta como dado contém
+um @. </font></p>
+
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+
+<p><font face="MS Sans Serif" size="1" color="#000000"><br>
+Quais são as diferentes possibilidades que existem para se enviar o conteúdo de um
+formulário? A&nbsp;maneira mais fácil é enviar os dados de um formulário via e-mail.
+Este é o método que vamos olhar mais de perto. Se você quiser ter um retorno sem
+e-mail, o seu servidor terá que manejar os dados automaticamente e, para isso, você
+terá que usar no momento um arquivo CGI. Você precisaria de CGI se quisesse, por
+exemplo, criar um engenho de busca como o Yahoo, onde o usuário obtém o resultado logo
+depois de ter fornecido os dados pelo formulário. A pessoa não precisa esperar até que
+as pessoas que mantêm este servidor leiam os dados e então procurem a informação
+requisitada. Isto é feito automaticamente pelo servidor. O JavaScript não tem a
+funcionalidade para fazer coisas como essas. Mesmo que você queira criar um livro de
+visitas, não vai conseguir com JavaScript que o servidor acrescente automaticamente a
+informação numa página HTML hospedada nele. Neste momento só o CGI pode fazer isto.
+Mas, por outro lado, você pode criar um livro de visitas onde as pessoas podem responder
+via e-mail. Entretanto, você terá que dar entrada no retorno manualmente. Mas isto
+estaria ok se você não espera receber 1000 retornos de mail por dia.<br>
+Este script aqui é puro HTML. Por isso, não se precisa de JavaScript aqui! Só se,
+naturalmente, você quiser checar os dados colocados antes de que o formulário seja
+enviado. Mas eu devo dizer também que o comando 'mailto' não funciona em todos os
+browsers, apenas nos mais novos. </font></p>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+&lt;FORM METHOD=POST ACTION=&quot;mailto:seu_email@vai.aqui&quot;&gt;
+&lt;H3&gt;Voc&amp;ecirc; gosta desta p&amp;aacute;gina?&lt;/H3&gt;
+  &lt;INPUT NAME=&quot;choice&quot; TYPE=&quot;RADIO&quot; VALUE=&quot;1&quot;&gt;N&amp;atilde;o &amp;eacute; nada.&lt;BR&gt;
+  &lt;INPUT NAME=&quot;choice&quot; TYPE=&quot;RADIO&quot; VALUE=&quot;2&quot; CHECKED&gt;Perda de tempo.&lt;BR&gt;
+  &lt;INPUT NAME=&quot;choice&quot; TYPE=&quot;RADIO&quot; VALUE=&quot;3&quot;&gt;O pior site da Net.&lt;BR&gt;
+  &lt;INPUT NAME=&quot;submit&quot; TYPE=&quot;SUBMIT&quot; VALUE=&quot;Enviar&quot;&gt;
+&lt;/FORM&gt;
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Você receberá o retorno através
+de e-mail fazendo desse jeito. O único problema é que você vai receber um mail que vai
+parecer um pouco criptográfico à primeira vista. Algumas vezes todos os espaços são
+preenchidos com '+', e outras vezes com '%20'.
+Por+isso,+ele+poderia+se+parecer+com+isto+aqui. Existem alguns programas corretores na
+Net, eu acho, que farão com que o mail recebido adquira um formato mais limpo. </font></p>
+
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+
+<p><font face="MS Sans Serif" size="1" color="#000000"><br>
+</font><font face="MS Sans Serif" size="1" color="#000000"><a name="focus"></a> Existe uma
+outra coisa legal que pode fazer com que os elementos do seu formulário pareçam um pouco
+mais amigáveis para o usuário. Você pode definir que elemento deve ser enfocado no
+começo. Ou então você pode dizer ao browser para enfocar no formulário o lugar onde o
+dado fornecido está errado. Isto significa que o browser posicionará o cursor no
+elemento do formulário que foi especificado para que o usuário não o envie antes de
+colocar os dados requisitados. Você pode implementar este recurso com o seguinte script: </font></p>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+function setfocus() {
+        document.first.text1.focus();
+        return;
+}
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1" color="#000000">Este script colocará o foco no
+primeiro elemento de texto do script que eu demonstrei acima. Você deverá especificar o
+nome do formulário todo - no caso aqui, chamado de <i>first</i> -, e o nome do elemento
+de formulário único - que aqui é <i>text1</i>. Se você quiser colocar o foco neste
+elemento quando a página estiver sendo carregada, você pode adicionar a propriedade
+onLoad no seu tag de &lt;body&gt;. Isto ficaria assim: </font></p>
+
+<pre><font face="MS Sans Serif" size="1" color="#000000">
+&lt;body onLoad=&quot;setfocus()&quot;&gt;
+
+</font></pre>
+
+<h4 align="center"><font face="MS Sans Serif" size="1" color="#000000"><a href="index.htm"
+onMouseOver="stat('Introdução ao JavaScript - Pagina Principal');return true">Index</a>
+- </font><font face="MS Sans Serif" size="1" color="#000000"><a href="javascr.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 1');
+ return true">Parte 1</a> - </font><font
+face="MS Sans Serif" size="1" color="#000000"><a href="javascr2.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 2');
+ return true">Parte 2</a> - </font><font
+face="MS Sans Serif" size="1" color="#000000"><a href="javascr3.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 3');
+ return true">Parte 3</a> - </font><font
+face="MS Sans Serif" size="1" color="#000000"><a href="javascr4.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 4');
+ return true">Parte 4</a> - </font><font
+face="MS Sans Serif" size="1" color="#000000"><a href="javascr5.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 5');
+ return true">Parte 5</a> - </font><font
+face="MS Sans Serif" size="1" color="#000000"><a href="javascr6.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 6');
+ return true">Parte 6</a> </font></h4>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<html>
+
+<head><script language="JavaScript">
+<!-- Hide
+function WinOpen(url) {
+   msg=open(url,"DisplayWindow","toolbar=no,directories=no,menubar=no,status=yes");
+}
+function statbar(txt) {
+   window.status = txt;
+}
+function moveover(txt) {
+   window.status = txt;
+   setTimeout("erase()",1000);
+}
+function erase() {
+   window.status="";
+}
+function stat(txt) {
+   window.status = txt;
+   setTimeout("erase()",1500);
+}
+// -->
+</script>
+
+<title>Introdução ao JavaScript - Parte 4</title>
+<style TYPE="text/css">
+<!--
+	A:link {font-weight: bold; text-decoration: none}
+	A:visited {font-weight: bold; text-decoration: none}
+        A:hover { font-weight: bold; color:blue;}
+-->
+</style>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000" link="#000000" vlink="#000000" alink="#000000">
+
+<p align="center"><font face="MS Sans Serif" size="1"><strong>Introdução ao JavaScript</strong><br>
+<img src="Jsd4.gif" width="68" height="68" alt="Parte 4"></font></p>
+
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+
+<p><font face="MS Sans Serif" size="1"><br>
+<br>
+Agora eu quero lhe mostrar como escrever um texto na barra de status (a barra que fica na
+parte de baixo do seu browser, onde são mostradas as URLs) e lhe explicar também como
+funciona uma barra de rolamento - se bem que elas já são odiadas no cenário do
+JavaScript (eu lhe direi o porquê depois).<br>
+Em primeiro lugar, como se 'direciona' a barra de status? Esse script vai lhe mostrar como
+se pode escrever um texto simples na barra de status: </font></p>
+
+<form>
+  <p><font face="MS Sans Serif" size="1"><input type="button" name="look" value="Escreva!"
+  onclick="statbar('Oi! Essa é a barra de status!');"> <input type="button" name="erase"
+  value="Apague!" onclick="statbar('');"> </font></p>
+</form>
+
+<p><font face="MS Sans Serif" size="1">Isso não é legal? Aqui está o script: </font></p>
+
+<pre><font face="MS Sans Serif" size="1">
+&lt;html&gt;
+&lt;head&gt;
+&lt;script language=&quot;JavaScript&quot;&gt;
+&lt;!-- Hide
+function statbar(txt) {
+   window.status = txt;
+}
+// --&gt;
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;form&gt;
+&lt;input type=&quot;button&quot; name=&quot;look&quot; value=&quot;Write!&quot; onclick=&quot;statbar('Oi! Essa &amp;eacute; a barra de status!');&quot;&gt;
+&lt;input type=&quot;button&quot; name=&quot;erase&quot; value=&quot;Erase!&quot; onclick=&quot;statbar('');&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1">Nós criamos dois botões que convocam a função
+statbar(txt). O txt entre parênteses demonstra que a função adquire uma variável que
+é colocada na chamada da função. (Eu a chamei de <i>txt</i>, mas poderia ser outra
+coisa qualquer.) Quando você olha para o tag &lt;form&gt; onde os botões foram criados,
+pode ver que ali é convocada a função <i>statbar(txt)</i>. Mas a gente não escreve <i>txt</i>
+lá. Nós simplesmente colocamos o texto que queremos que o browser mostre na barra de
+status. Você pode ver isto desse modo: a função é convocada e define a variável <i>txt
+</i>- ela assume o 'valor' que você colocou na chamada da função. Desse modo, quando se
+pressiona o botão 'Escreva!', a função statbar(txt) é convocada e <i>txt</i> armazena
+a seqüência 'Oi! Essa é a barra de status'. Você pode então usar a variável <i>txt</i>
+como de costume. Este método de colocar variáveis numa função as torna instrumentos
+muito flexíveis. Veja o segundo botão, ele convoca a mesma função. Sem a colocação
+de uma variável nós precisaríamos de duas funções diferentes.<br>
+Pois bem, o&nbsp;que é que a função <i>statbar(txt)</i> realiza? Isto é muito simples.
+Você apenas escreve o conteúdo de <i>txt</i> na variável window.status. Isto é feito
+através de <i>window.status = txt;</i>. Ao se escrever uma seqüência vazia na barra de
+status ('') nós simplesmente a apagamos. Observe que nós tivemos que usar estas aspas
+simples ' porque já usamos as aspas duplas &quot; para definir onClick. O&nbsp;browser
+precisa saber quais são as aspas que formam par - por isso é necessário alternar aspas
+simples e duplas. Acho que isso é bastante claro. </font></p>
+
+<p><font face="MS Sans Serif" size="1">Você já conhece a propriedade onMouseOver da
+parte 2 do meu tutorial:<br>
+&lt;a href=&quot;stupid.htm&quot; onMouseOver=&quot;window.status='Apenas outro link
+estupido...'; return true&quot;&gt; <br>
+Você não tem raiva quando vê que a barra de status não se apaga quando a seta do mouse
+não está mais apontando para o link? Eu tenho uma solução simples para isso. Basta
+escrever uma pequena função que usa a mesma técnica de apagar a barra de status que foi
+mostrada acima. Mas como poderíamos convocar a função apagadora? Nós não temos um
+método ou propriedade que possamos usar para detectar se a seta do mouse está indo
+embora do link. A&nbsp;solução é colocar um cronômetro. </font></p>
+
+<p><font face="MS Sans Serif" size="1">Tente o seguinte script: <a href="dontclck.htm"
+onMouseOver="moveover('Desaparecendo!'); return true;">aqui</a>. Só posicione o seu mouse
+sobre ele - não clique! </font></p>
+
+<p><font face="MS Sans Serif" size="1">Isso não é jóia? Dá uma olhadinha no código e
+você vai ver que é muito mais fácil do que parece à primeira vista. </font></p>
+
+<pre><font face="MS Sans Serif" size="1">
+&lt;html&gt;
+&lt;head&gt;
+&lt;script language=&quot;JavaScript&quot;&gt;
+&lt;!-- Hide
+function moveover(txt) {
+   window.status = txt;
+   setTimeout(&quot;erase()&quot;,1000);
+}
+function erase() {
+   window.status=&quot;&quot;;
+}
+// --&gt;
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;a href=&quot;dontclck.htm&quot; onMouseOver=&quot;moveover('Desaparecendo!');return true;&quot;&gt;
+link&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1">Você vai reconhecer muitas partes desse script. A
+função moveover(txt) é só a função statbar(txt) depois de algum trabalho de
+copiar/colar sobre ela! É quase que a mesma coisa também com a função erase(). Na
+página HTML nós criamos um link com a conhecida propriedade onMouseOver. A nossa
+função moveover(txt) é então convocada com a seqüência 'Desaparecendo' sendo
+colocada na variável txt. O window.status pega o conteúdo de txt. É a mesma coisa que
+já aconteceu na função statbar(txt). A função setTimeout(...) entretanto é nova.
+Esta função cria um intervalo. Quem iria esperar uma coisa dessas? A função
+setTimeout(...) define quanto tempo deve-se decorrer e o que acontecerá quando este tempo
+se terminar. No nosso exemplo a função erase() é convocada após 1000 milisegundos
+(isto é equivalente a 1 segundo - para todos os craques de matemática que estão por
+aí). Este é um aspecto fantástico! A função moveover(txt) acaaba depois que se coloca
+um cronômetro. O browser chama a função erase() automaticamente depois de 1 segundo.
+(Você já está imaginando uma página que diga ao usuário: <i>Se você não fizer tal
+coisa o seu HD será destruído em 10 segundos!</i> ???) <br>
+Depois que o intervalo é definido o cronômetro nunca mais se reinicia. Mas você pode
+convocá-lo novamente, se quiser, na função erase(). Isto nos leva diretamente às
+barras de rolamento amadas por todos. </font></p>
+
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+
+<p><font face="MS Sans Serif" size="1">Como você já sabe como escrever na barra de
+status e como trabalha a função setTimeout, as barras de rolamento serão fáceis de se
+entender. </font></p>
+
+<p><font face="MS Sans Serif" size="1">Pressione este botão para ver a minha barra de
+rolamento. O script tem que ser carregado a partir do servidor, por isso lhe peço um
+pouco de paciência se você não vir o texto rolante imediatamente. </font></p>
+
+<form>
+  <p><font face="MS Sans Serif" size="1"><input type="button" name="Button"
+  value="texto rolante" onclick="WinOpen('scroller.htm')"> </font></p>
+</form>
+
+<p><font face="MS Sans Serif" size="1">Dê uma olhadinha no script: </font></p>
+
+<pre><font face="MS Sans Serif" size="1">
+&lt;html&gt;
+&lt;head&gt;
+&lt;script language=&quot;JavaScript&quot;&gt;
+&lt;!-- Hide
+
+var scrtxt=&quot;Aqui vai a mensagem para os visitantes da sua pagina que &quot;+
+&quot;ficarao olhando por horas de pura fascinacao...&quot;;
+var lentxt=scrtxt.length;
+var width=100;
+var pos=1-width;
+
+function scroll() {
+  pos++;
+  var scroller=&quot;&quot;;
+  if (pos==lentxt) {
+    pos=1-width;
+  }
+  if (pos&lt;0) {
+    for (var i=1; i<=Math.abs(pos); i++) { scroller="scroller+&quot;" ";} scroller="scroller+scrtxt.substring(0,width-i+1);" } else { scroller="scroller+scrtxt.substring(pos,width+pos);" } window.status="scroller;" setTimeout("scroll()",150); } //-->
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body onLoad=&quot;scroll();return true;&quot;&gt;
+Aqui est&amp;aacute; a sua p&amp;aacute;gina bacana!
+&lt;/body&gt;
+&lt;/html&gt;
+</font></pre>
+
+<p><font face="MS Sans Serif" size="1">Este script usa as mesmas funções (ou partes
+delas) que já usamos acima. O setTimeout(...) 'avisa' ao cronômetro para convocar a
+função scroll() no tempo marcado. O rolamento irá funcionar no passo seguinte. No
+começo tem um monte de cálculos, mas isso não é importante para se entender como
+funciona o script. Os cálculos estão ali para indicar a posição em que o texto rolante
+deve começar. Se isso for logo no começo, o script tem que adicionar alguns espaços
+para situar o texto corretamente. </font></p>
+
+<p><font face="MS Sans Serif" size="1">Eu disse no início desta parte da minha
+introdução que os textos rolantes não são muito populares, ou que se eles ainda são
+populares não ficarão assim por muito tempo. Existem razões para isso. Eu posso listar
+várias aqui, mas certamente haverá muito mais. <br>
+Se você vê esse efeito pela primeira vez ele pode parecer muito legal, mas se você o
+vir 1 milhão de vezes por aí não vai mais parecer muito divertido. Bem, este não é um
+bom argumento na verdade porque afeta quase todos os truques que você pode usar em suas
+páginas. <br>
+Mas há problemas mais graves. O que eu não gosto é que ele muda a velocidade quando se
+movimenta o mouse (ele fica mais rápido!). Pelo menos isso acontece comigo. Esse efeito
+fica ainda mais forte quando se tenta fazer o texto rolante rodar um pouco mais rápido ao
+se modificar o valor do setTimeout. Talvez haja algum contorno para esse problema. Mas o
+pior é que se você deixa este script rodar algum tempo pode acabar recebendo uma
+mensagem de &quot;<i>Out of memory error</i>&quot; (&quot;erro por falta de
+memória&quot;). E isso é realmente muito ruim. Parece ser um problema típico do
+Netscape Navigator 2.0. Talvez uma versão maior tenha já resolvido esse problema. </font></p>
+
+<p><font face="MS Sans Serif" size="1">Existem muitas outras rotinas na Net. Eu já vi
+alguns textos rolantes escritos em frames. Programar isto não deve ser muito difícil. </font></p>
+
+<h4 align="center"><a href="index.htm"
+onMouseOver="stat('Introdução ao JavaScript - Pagina Principal');return true"><font
+face="MS Sans Serif" size="1">Index</font></a><font face="MS Sans Serif" size="1"> - <a
+href="javascr.htm" onMouseOver="stat('JavaScript - Introdução Parte 1');
+ return true">Parte
+1</a> - <a href="javascr3.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 3');
+ return true">Parte 3</a> - <a
+href="javascr5.htm" onMouseOver="stat('JavaScript - Introdução Parte 5');
+ return true">Parte
+5</a> - <a href="javascr6.htm"
+onMouseOver="stat('JavaScript - Introdução Parte 6');
+ return true">Parte 6</a> - <a
+href="javascr7.htm" onMouseOver="stat('JavaScript - Introdução Parte 7');
+ return true">Parte
+7</a> </font></h4>
+
+<p><font face="MS Sans Serif" size="1"><br>
+</font></p>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<html>
+ 
+<head><script language="JavaScript">
+<!-- Hide
+ function WinOpen(url) {
+ msg=open(url,"DisplayWindow","toolbar=yes,directories=no,menubar=no");
+ }
+ function stat(txt) {
+ window.status = txt;
+ setTimeout("erase()",1500);
+ }
+ function erase() {
+ window.status="";
+ }
+ // -->
+</script>
+ 
+<title>Introdução ao JavaScript - Parte 3</title>
+<style TYPE="text/css">
+<!--
+ 	A:link {font-weight: bold; text-decoration: none}
+ 	A:visited {font-weight: bold; text-decoration: none}
+ A:hover { font-weight: bold; color:blue;}
+ -->
+</style>
+</head>
+ 
+<body TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#000000" VLINK="#000000" ALINK="#000000">
+ 
+<p align="center"><font face="MS Sans Serif" size="1"><b>Introdução ao JavaScript</b><br>
+<img src="Jsd3.gif" width="83" height="66" alt="Parte 3 "></font></p>
+ 
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+ 
+<p><font face="MS Sans Serif" size="1"><br>
+<br>
+ Muita gente já me perguntou como se trabalha com frames no JavaScript. Para usar frames
+ no JavaScript você deve ter pelo menos o Netscape Navigator 2.0 neste momento. É claro
+ que existem outros browsers que suportam frames também, mas em geral eles não suportam o
+ JavaScript - embora eu ache que não vai demorar muito tempo para termos outros browsers
+ que suportam frames e JavaScript ao mesmo tempo.<br>
+ Em primeiro lugar, eu gostaria de falar um pouco sobre frames. Muitas das documentações
+ sobre HTML não têm nada sobre sobre frames porque esse recurso é uma coisa recente. Ao
+ usar frames você pode 'dividir' em várias partes a janela que mostra as páginas HTML.
+ Assim, você terá algumas partes independentes na sua janela, e poderá carregar páginas
+ diferentes nos frames. Uma coisa legal é que estes frames podem se interagir, isto é,
+ eles podem trocar informações entre si. Por exemplo, você poderia criar 2 frames, um
+ com a sua página HTML normal e outro com uma barra de ferramentas. A barra de ferramentas
+ poderia conter botões para navegação através da sua página HTML normal. Essa barra de
+ ferramentas seria sempre visível, mesmo quando outra página HTML fosse carregada no
+ outro frame. Antes de mais nada eu gostaria de lhe mostrar como seria isso: pressione o
+ botão e veja como são os frames (se você estiver olhando para esta página on-line,
+ então vai ter que esperar um tempinho ao pressionar o botão nesta parte do tutorial
+ porque os scripts são carregados a partir do servidor). </font></p>
+ 
+<form>
+<p><font face="MS Sans Serif" size="1"><input type="button" name="Button1"
+ value="Aperte-me" onclick="WinOpen('frtest.htm')"> </font></p>
+</form>
+ 
+<p><font face="MS Sans Serif" size="1">Aqui está o script HTML para frames: </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">&lt;HTML&gt;
+ &lt;HEAD&gt;
+ &lt;title&gt;Frames&lt;/title&gt;
+ &lt;/HEAD&gt;
+ &lt;FRAMESET ROWS=&quot;50%,50%&quot;&gt;
+ &lt;FRAME SRC=&quot;frtest1.htm&quot; name=&quot;fr1&quot;&gt;
+ &lt;FRAME SRC=&quot;frtest2.htm&quot; name=&quot;fr2&quot;&gt;
+ &lt;/FRAMESET&gt;
+ &lt;/HTML&gt;
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1">Em primeiro lugar você diz ao browser quantos
+ frames você quer ter. Isto se define no descritor &nbsp;&lt;frameset...&gt; . Ao designar
+ linhas (rows) no descritor, o browser irá dividir o espaço indicado em linhas. Você
+ também pode criar colunas se usar <i>cols</i> ao invés de <i>rows</i>. Você também
+ pode usar vários descritores ou tags de &lt;frameset...&gt; ao mesmo tempo. Veja o
+ exemplo dado pela Netscape: </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">&lt;FRAMESET COLS=&quot;50%,50%&quot;&gt;
+ &lt;FRAMESET ROWS=&quot;50%,50%&quot;&gt;
+ &lt;FRAME SRC=&quot;cell.html&quot;&gt;
+ &lt;FRAME SRC=&quot;cell.html&quot;&gt;
+ &lt;/FRAMESET&gt;
+ &lt;FRAMESET ROWS=&quot;33%,33%,33%&quot;&gt;
+ &lt;FRAME SRC=&quot;cell.html&quot;&gt;
+ &lt;FRAME SRC=&quot;cell.html&quot;&gt;
+ &lt;FRAME SRC=&quot;cell.html&quot;&gt;
+ &lt;/FRAMESET&gt;
+ &lt;/FRAMESET&gt;
+</font></pre>
+ 
+<form>
+<p><font face="MS Sans Serif" size="1"><input type="button" name="Button2"
+ value="Veja este script" onclick="WinOpen('nsexmpl.htm')"> </font></p>
+</form>
+ 
+<p><font face="MS Sans Serif" size="1">São criadas duas colunas, e a segunda coluna é
+ dividida em tres partes iguais. Os números 50%,50% no primeiro descritor &lt;frameset&gt;
+ informam ao browser o tamanho que os frames devem ter.<br>
+ Você pode dar nomes aos seus frames. Isto é importante para o uso com JavaScript. No
+ primeiro exemplo acima é possível ver como se nomeiam os frames: ao se utilizar o tag
+ &lt;frame&gt; você informa ao browser que página HTML ele deve carregar. </font></p>
+ 
+<p><font face="MS Sans Serif" size="1"><br>
+</font></p>
+ 
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+ 
+<p><font face="MS Sans Serif" size="1">Acho que os elementos básicos dos frames são
+ fáceis de entender. Agora, dê uma olhada no nosso próximo exemplo: </font></p>
+ 
+<form>
+<p><font face="MS Sans Serif" size="1"><input type="button" name="Button3"
+ value="Frames e Scripts" onclick="WinOpen('frames.htm')"> </font></p>
+</form>
+ 
+<p><font face="MS Sans Serif" size="1">Aqui se abre uma janela onde se pode clicar em
+ alguns botões para que seja possível escrever textos em outro frame. <br>
+ Segue-se a fonte: </font></p>
+ 
+<p><font face="MS Sans Serif" size="1"><i>Para se criar frames, você vai precisar
+ (frames.htm):</i> </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">&lt;HTML&gt;
+ &lt;HEAD&gt;
+ &lt;title&gt;Frames&lt;/title&gt;
+ &lt;/HEAD&gt;
+ &lt;FRAMESET ROWS=&quot;50%,50%&quot;&gt;
+ &lt;FRAME SRC=&quot;frame1.htm&quot; name=&quot;fr1&quot; noresize&gt;
+ &lt;FRAME SRC=&quot;frame2.htm&quot; name=&quot;fr2&quot;&gt;
+ &lt;/FRAMESET&gt;
+ &lt;/HTML&gt;
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1"><i>Aqui está a fonte de frame1.htm:</i> </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">&lt;HTML&gt;
+ &lt;HEAD&gt;
+ &lt;script language=&quot;JavaScript&quot;&gt;
+ &lt;!-- Hiding
+ function hi() {
+ document.write(&quot;Al&amp;ocirc;!&lt;br&gt;&quot;);
+ }
+ function yo() {
+ document.write(&quot;E a&amp;iacute;?&lt;br&gt;&quot;);
+ }
+ function bla() {
+ document.write(&quot;bla bla bla&lt;br&gt;&quot;);
+ }
+ // --&gt;
+ &lt;/script&gt;
+ &lt;/HEAD&gt;
+ &lt;BODY&gt;
+ Este &amp;eacute; o nosso primeiro frame!
+ &lt;/BODY&gt;
+ &lt;/HTML&gt;
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1"><i>E aqui o frame2.htm:</i> </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">&lt;HTML&gt;
+ &lt;body&gt;
+ Este &amp;eacute; o nosso segundo frame!
+ &lt;p&gt;
+ &lt;FORM NAME=&quot;buttonbar&quot;&gt;
+ &lt;INPUT TYPE=&quot;button&quot; VALUE=&quot;Al&amp;ocirc;&quot; onClick=&quot;parent.fr1.hi()&quot;&gt;
+ &lt;INPUT TYPE=&quot;button&quot; VALUE=&quot;E a&amp;iacute;?&quot; onClick=&quot;parent.fr1.yo()&quot;&gt;
+ &lt;INPUT TYPE=&quot;button&quot; VALUE=&quot;Bla&quot; onCLick=&quot;parent.fr1.bla()&quot;&gt;
+ &lt;/FORM&gt;
+ &lt;/BODY&gt;
+ &lt;/HTML&gt;
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1">Uau! Estes scripts vão ficando cada vez mais
+ longos! O que se fez agora? O usuário carrega o primeiro arquivo (frames.htm). Isto cria
+ os frames e carrega os arquivos HTML frame1.htm no primeiro frame (nomeado como 'fr1') e
+ frame2.htm no segundo frame (chamado 'fr2'). Até agora isto é puro HTML. Como se pode
+ notar, o primeiro script frame1.htm contém algumas funções JavaScript. Mas elas não
+ são chamadas no primeiro script. Então por que elas seriam necessárias afinal de
+ contas? Será que eu sou tão preguiçoso a ponto de não deletar essas funções
+ desnecessárias? Ainda que eu seja mesmo um preguiçoso, na realidade essas funções são
+ necessárias. Elas serão chamadas pelo segundo script frame2.htm! Nós criamos alguns
+ botões neste segundo script do mesmo modo como fizemos na primeira parte desta
+ introdução. A propriedade onClick já é familiar também. Mas o que será que significa
+ parent.fr1... ? </font></p>
+ 
+<p><font face="MS Sans Serif" size="1">Se você já é familiarizado com esses objetos
+ então nada disso é novidade. Como se pôde notar acima, os arquivos frame1.htm e
+ frame2.htm são convocados pelo arquivo frames.htm. Nós podemos dizer que frames.htm é o
+ pai dos outros dois frames. Conseqüentemente os novos dois frames podem ser chamados de
+ frames filhos de frames.htm. Você pode observar que há uma certa hierarquia que
+ proporciona um interrelacionamento entre os diferentes frames. Vou tentar demonstrar essa
+ idéia com a ajuda de um pequeno 'gráfico' (arte ASCII descreveria isso muito melhor...):
+</font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">              frames.htm                pai
+ /      \
+ /        \
+ /          \
+ fr1(frame1.htm)     fr2(frame2.htm)   filhos
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1">É lógico que você pode estender este conceito.
+ Você pode criar também alguns 'netos' (se quiser chamar desse jeito - esta não é uma
+ expressão oficial!). Isso ficaria assim: </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">              frames.htm                pai
+ /      \
+ /        \
+ /          \
+ fr1(frame1.htm)     fr2(frame2.htm)   filhos
+ /  \
+ /    \
+ /      \
+ gchild1  gchild2                    'netos'
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1">Se você deseja indexar alguma coisa ao frame-pai a
+ partir de frame2.htm, basta colocar simplesmente <i>parent.</i> diante da função que se
+ pretende convocar. Para se referir às funções definidas em frame1.htm a partir do
+ frame-pai, basta colocar <i>fr1</i> diante da função convocante. Por que <i>fr1</i>? No
+ nosso script no frame-pai (frames.htm) nós criamos frames diferentes e lhes demos nomes
+ diferentes. Eu escolhi <i>fr1</i> para o primeiro frame. O passo seguinte é fácil. Como
+ se chama o primeiro frame se você quer se referir a ele a&nbsp;partir de frame2.htm (o
+ qual é mantido no segundo frame chamado <i>fr2</i>)? Como se pode ver pelo meu horrível
+ gráfico não há nenhuma conexão direta entre frame1.htm e frame2.htm. Por isso, não se
+ pode convocar funções definidas em frame1.htm, diretamente a partir de frame2.htm. Você
+ deve se referir a elas através do frame-pai. Assim, a correta indexação é parent.fr1.
+ Se você quiser convocar a função hi() a partir de frame2.htm é&nbsp;preciso escrever
+ parent.fr1.hi(). Isto é o que foi feito no segundo script na propriedade onClick. </font></p>
+ 
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+ 
+<p><font face="MS Sans Serif" size="1">Se você criou alguns frames, e alguém segue os
+ links, os frames não vão desaparecer. Isso está correto se o usuário 'permanecer' na
+ sua página. Você poderia criar uma barra de menus que poderia ser mostrada em um frame
+ todo o tempo, por exemplo. Mas se o usuário quiser saltar para outra página na Internet,
+ a&nbsp;sua barra de menus não será mais necessária. Então, como se pode deletar os
+ frames depois de criados? </font></p>
+ 
+<p><font face="MS Sans Serif" size="1">Coloque TARGET=&quot;_top&quot; no seu descritor
+ &lt;a href...&gt; . Isto ficará assim:<br>
+</font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">&lt;a href=&quot;saida.html&quot; TARGET=&quot;_top&quot;&gt;se você não quiser mais ficar preso na minha página&lt;/a&gt;
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1">Naturalmente você deve colocar o
+ TARGET=&quot;_top&quot; em todos os links que conduzam 'para fora'. Se todos os links da
+ sua página levarem 'para fora', você também pode escrever &lt;base
+ target=&quot;_top&quot;&gt; no head da sua página HTML. Isto vai significar que todos os
+ links da página apagam os frames. </font></p>
+ 
+<p>&nbsp;</p>
+ 
+<h4 ALIGN="CENTER"><a HREF="index.htm"
+ onMouseOver="stat('Introdução ao JavaScript - Pagina Principal');
+ return true"><font
+ face="MS Sans Serif" size="1">Index</font></a><font face="MS Sans Serif" size="1"> - <a
+ HREF="javascr.htm" onMouseOver="stat('JavaScript - Introdução Parte 1');
+ return true">Parte
+ 1</a> - <a HREF="javascr2.htm"
+ onMouseOver="stat('JavaScript - Introdução Parte 2');
+ return true">Parte 2</a> - <a
+ HREF="javascr4.htm" onMouseOver="stat('JavaScript - Introdução Parte 4');
+ return true">Parte
+ 4</a> - <a HREF="javascr5.htm"
+ onMouseOver="stat('JavaScript - Introdução Parte 5');
+ return true">Parte 5</a> - <a
+ HREF="javascr6.htm" onMouseOver="stat('JavaScript - Introdução Parte 6');
+ return true">Parte
+ 6</a> - <a HREF="javascr7.htm"
+ onMouseOver="stat('JavaScript - Introdução Parte 7');
+ return true">Parte 7</a> </font></h4>
+</body>
+</html>
+ 
+

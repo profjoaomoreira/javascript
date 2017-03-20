@@ -1,0 +1,142 @@
+<html>
+ 
+<head><script language="JavaScript">
+<!-- Hiding
+ 
+ function initArray() {
+ this.length = initArray.arguments.length
+ for (var i = 0; i < this.length; i++)
+ this[i+1] = initArray.arguments[i]
+ }
+ 
+ var startpos = new initArray(9,9,9,9,9,0,0,0,9,0,0,0,9,0,0,0,9,9,9,9);
+ var pos = new initArray(9,9,9,9,9,0,0,0,9,0,0,0,9,0,0,0,9,9,9,9);
+ var nummoves= 0;
+ 
+ function random() {
+ today = new Date();
+ num = today.getTime();
+ num = Math.round(Math.abs(Math.sin (num)*1000000)) % 9;
+ return num;
+ }
+ 
+ function display(pos) {
+ parent.ga1.document.close();
+ parent.ga1.document.open();
+ parent.ga1.document.write("<form>");
+ parent.ga1.document.write("<input type='Button' value=' "+pos[6]+" ' onClick='parent.ga2.move(6)'>");
+ parent.ga1.document.write("<input type='Button' value=' "+pos[7]+" ' onClick='parent.ga2.move(7)'>");
+ parent.ga1.document.write("<input type='Button' value=' "+pos[8]+" ' onClick='parent.ga2.move(8)'> <br>");
+ parent.ga1.document.write("<input type='Button' value=' "+pos[10]+" ' onClick='parent.ga2.move(10)'>");
+ parent.ga1.document.write("<input type='Button' value=' "+pos[11]+" ' onClick='parent.ga2.move(11)'>");
+ parent.ga1.document.write("<input type='Button' value=' "+pos[12]+" ' onClick='parent.ga2.move(12)'><br>");
+ parent.ga1.document.write("<input type='Button' value=' "+pos[14]+" ' onClick='parent.ga2.move(14)'>");
+ parent.ga1.document.write("<input type='Button' value=' "+pos[15]+" ' onClick='parent.ga2.move(15)'>");
+ parent.ga1.document.write("<input type='Button' value=' "+pos[16]+" ' onClick='parent.ga2.move(16)'>");
+ parent.ga1.document.write("<p><br>Number of moves: "+nummoves+"<br>");
+ win();
+ }
+ 
+ 
+ function move(num) {
+ // num é o número do campo que o usuário clicou - não a imagem!
+ if (pos[num-4]==0) {
+ pos[num-4]= pos[num];
+ pos[num]= 0;
+ nummoves++;
+ }
+ else {if (pos[num-1]==0){
+ pos[num-1]= pos[num];
+ pos[num]= 0;
+ nummoves++;
+ }
+ else {if (pos[num+1]==0){
+ pos[num+1]= pos[num];
+ pos[num]= 0;
+ nummoves++;
+ }
+ else {if (pos[num+4]==0){
+ pos[num+4]= pos[num];
+ pos[num]= 0;
+ nummoves++;
+ }
+ //else illegal move => não é um movimento!
+ }
+ }
+ }
+ display(pos);
+ }
+ 
+ function win() {
+ if (pos[6]== 1 & pos[7]== 2 & pos[8]== 3 & pos[10]== 4 & pos[11]== 5
+ & pos[12]== 6 & pos[14]== 7 & pos[15]== 8 & pos[16]== 0) {
+ if (confirm('Você conseguiu! Quer reiniciar?')) newgame();
+ 
+ }
+ }
+ 
+ function newgame() {
+ var helparray= new initArray(0,0,0,0,0,0,0,0,0);
+ for (var i=1; i<9;i++) {
+ randomnum= random();
+ while (helparray[randomnum] || 0) {
+ randomnum= random();
+ }
+ helparray[randomnum]= i;
+ }
+ for (var i=1; i<21;i++) {
+ pos[i]= startpos[i];
+ }
+ for (var i=1; i<4; i++) {
+ for (var j=0; j<3; j++) {
+ pos[i+5+j*4]= helparray[i+3*j];
+ }
+ }
+ nummoves=0;
+ display(pos);
+ }
+ 
+ 
+ // -->
+</script>
+ 
+<title></title>
+<style TYPE="text/css">
+<!--
+ 	A:link {font-weight: bold; text-decoration: none}
+ 	A:visited {font-weight: bold; text-decoration: none}
+ A:hover { font-weight: bold; color:blue;}
+ -->
+</style>
+</head>
+ 
+<body link="#000000" vlink="#000000" alink="#000000">
+ 
+<form NAME="buttonbar">
+<p><input TYPE="button" VALUE="Começar um novo jogo" onClick="newgame()"
+ style="font-family: sans-serif; font-size: 8pt"> </p>
+</form>
+ 
+<h1><font face="MS Sans Serif" size="1">Regras</font></h1>
+ 
+<p><font face="MS Sans Serif" size="1">Você tem que colocar os números do primeiro frame
+ na ordem certa. O 0 é o lugar 'vazio'. Você pode então mover qualquer número que
+ esteja do lado do 0 para o seu lugar. Para mover um número basta pressionar o seu botão
+ correspondente. Você deve colocar os números na seguinte ordem:</font></p>
+ 
+<form>
+<p><font face="MS Sans Serif" size="1"><input type="button" value=" 1 "><input
+ type="button" value=" 2 "><input type="button" value=" 3 "><br>
+<input type="button" value=" 4 "><input type="button" value=" 5 "><input type="button"
+ value=" 6 "><br>
+<input type="button" value=" 7 "><input type="button" value=" 8 "><input type="button"
+ value=" 0 "><br>
+</font></p>
+</form>
+<font face="MS Sans Serif" size="1">
+ 
+<p><a href="index.htm" TARGET="_top">JavaScript-Tutorial</a> </font></p>
+</body>
+</html>
+ 
+

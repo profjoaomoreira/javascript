@@ -1,0 +1,181 @@
+<html>
+ 
+<head><script language="JavaScript">
+<!-- Hide
+ function initArray() {
+ this.length = initArray.arguments.length
+ for (var i = 0; i < this.length; i++)
+ this[i+1] = initArray.arguments[i]
+ }
+ function stat(txt) {
+ window.status = txt;
+ setTimeout("erase()",1500);
+ }
+ function erase() {
+ window.status="";
+ }
+ // -->
+</script>
+ 
+<title>Introdução ao JavaScript - Parte 5</title>
+<style TYPE="text/css">
+<!--
+ 	A:link {font-weight: bold; text-decoration: none}
+ 	A:visited {font-weight: bold; text-decoration: none}
+ A:hover { font-weight: bold; color:blue;}
+ -->
+</style>
+</head>
+ 
+<body bgcolor="#FFFFFF" text="#000000" link="#000000" vlink="#000000" alink="#000000">
+ 
+<p align="center"><font face="MS Sans Serif" size="1"><b>Introdução ao JavaScript</b><br>
+<img src="Jsd5.gif" width="85" height="66" alt="Parte 5"></font></p>
+ 
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+ 
+<p><font face="MS Sans Serif" size="1"><br>
+<br>
+ Uma técnica importante de programação é o uso de matrizes. A maioria das linguagens de
+ programação os suporta de algum modo. Talvez você já tenha atingido um ponto em que as
+ matrizes poderiam lhe ajudar ainda mais. Mas se você der uma olhada na documentação
+ fornecida pela Netscape vai notar que nada é dito sobre matrizes. O problema é que as
+ matrizes não existem em JavaScript! Mas existe um meio de cotornar esse problema, é
+ claro!<br>
+ Em primeiro lugar, o que são matrizes? Nós poderíamos dizer que as matrizes são uma
+ junção de variáveis. Digamos que você queira juntar 10 variáveis. Você poderia
+ começar com as variáveis a, b, c ... Porém isto seria muito complicado. Particularmente
+ se você quisesse armazenar 100 variáveis ou mais. Se você tivesse uma matriz chamado
+ 'MyArray' e dispusesse de 10 elementos, você poderia direcionar os diferentes elementos
+ com MyArray[1], MyArray[2], MyArray[3]... (muitas linguagens de programação começam com
+ o 0 como primeiro elemento, mas nós vamos começar com o 1 porque este é o modo que
+ passou a ser utilizado no JavaScript). Dessa maneira, se você quiser ter o número 17
+ como primeiro elemento, basta escrever <i>MyArray[1]=17</i>. Observe que você pode
+ trabalhar com as matrizes da mesma maneira como se faz com as variáveis normais. Mas
+ existem alguns aspectos adicionais. Se você quiser armazenar o número 17 em todos os
+ elementos, você deve escrever desse modo: </font></p>
+ 
+<p><font face="MS Sans Serif" size="1"><br>
+<i>for (var i=1;i&lt;11;i++) MyArray[i]=17&lt;11;i++) </i></font></p>
+ 
+<p><font face="MS Sans Serif" size="1">O comando for avisa ao computador quantas vezes o
+ próximo comando deve ser executado. O laço (loop) de <i>for</i> se inicia com i=1.
+ Primeiro o computador recebe o comando MyArray[1]= 17. Depois disso i é aumentado em 1 e
+ então o comando passa a ser MyArray[2]= 17. i é aumentado até que ele atinja o valor
+ 10. (The expression i&lt;11 no laço de <i>for</i> tem que ser verdadeira; se i se tornar
+ 11 então a expressão não será mais verdadeira. ) Agora eu vou lhe mostrar uma função
+ para iniciar as matrizes. Ela foi discutida numa Mailing List de JavaScript. </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">
+ function initArray() {
+ this.length = initArray.arguments.length
+ for (var i = 0; i &lt; this.length; i++)
+ this[i+1] = initArray.arguments[i]
+ }
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1">Você não precisa entender essa função, só
+ precisa saber usá-la. Se você quiser criar uma matriz com três elementos, basta
+ escrever: <i>var MyArray= new initArray(17,18,19)</i>. Para 17,18 e 19 são assignados os
+ elementos 1,2 e 3. Você poderia escrever outra seqüência qualquer na sua matriz se
+ quisesse. Não importa a figura que estará sendo usada! <i>var aloai= new
+ initArray(&quot;Isso&quot;,&quot;e'&quot;,&quot;legal&quot;)</i>. Não há problema
+ também em se misturar figuras diferentes: <i>var Mistura= new
+ initArray(17,&quot;oi&quot;,103)</i>. </font></p>
+ 
+<p><font face="MS Sans Serif" size="1">Eu vou iniciar agora a matriz 'Mistura' e lhe
+ mostrar o resultado: </font></p>
+ 
+<p><font face="MS Sans Serif" size="1"><script language="JavaScript">
+<!-- Hide
+ var Mistura= new initArray(17,"oi",103);
+ document.write("Elemento No. 1: "+Mistura[1]+"<br>");
+ document.write("Elemento No. 2: "+Mistura[2]+"<br>");
+ document.write("Elemento No. 3: "+Mistura[3]+"<br>");
+ // --> </script> </font></p>
+ 
+<p><font face="MS Sans Serif" size="1">Este é o script do resultado: </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">
+ &lt;script language=&quot;JavaScript&quot;&gt;
+ &lt;!-- Hide
+ var Mistura= new initArray(17,&quot;oi&quot;,103);
+ document.write(&quot;Elemento No. 1: &quot;+Mistura[1]+&quot;&lt;br&gt;&quot;);
+ document.write(&quot;Elemento No. 2: &quot;+Mistura[2]+&quot;&lt;br&gt;&quot;);
+ document.write(&quot;Elemento No. 3: &quot;+Mistura[3]+&quot;&lt;br&gt;&quot;);
+ // --&gt;
+ &lt;/script&gt;
+</font></pre>
+ 
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+ 
+<p><font face="MS Sans Serif" size="1">Ontem eu escrevi um pequeno jogo, e então me
+ deparei com um problema que talvez você também já tenha encontrado. Quando você quer
+ saber como limpar uma janela, e procura na documentação fornecida pela Netscape, vai
+ encontrar a função Javascript 'document.clear()'. Mas se você tenta implementar esta
+ função não vai acontecer nada! Aparentemente a função document.clear() não funciona
+ em nenhuma plataforma. Gordon McComb me passou então o seguinte script para se limpar
+ janelas tal como eu pretendia. </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">
+ document.close();
+ document.open();
+ document.write(&quot;&lt;P&gt;&quot;);
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1">Você não precisa escrever <i>document.write(&quot;&lt;P&gt;&quot;);</i>.
+ O importante é que você mande alguma coisa para a janela. Isso funciona perfeitamente
+ também com frames. </font></p>
+ 
+<hr WIDTH="80%" ALIGN="center" SIZE="1">
+ 
+<p><font face="MS Sans Serif" size="1">Agora nós vamos ver um script que permite que
+ você navegue através de diferentes documentos. Eu estou falando das funções back() e
+ forward(). Se você tiver um link do tipo &quot;back&quot; na sua página isso não é a
+ mesma coisa que o botão &quot;back&quot; do Navigator da Netscape. Eu, por exemplo, tenho
+ alguns links do tipo &quot;back&quot; que funcionam normalmente como qualquer outro link.
+ Mas eu sei que o usuário da minha página provavelmente provém de uma determinada
+ página que tem um link com a minha. O botão de &quot;back&quot; do Netscape Navigator
+ funciona dando um passo atrás na sua lista histórica, e isso é o que você também pode
+ fazer com JavaScript. <a href="backtest.htm">Pegue este link</a> então para dar um passo
+ atrás! O script que eu uso aqui é o que está aqui embaixo: </font></p>
+ 
+<pre><font face="MS Sans Serif" size="1">
+ &lt;html&gt;
+ &lt;body&gt;
+ &lt;FORM NAME=&quot;buttonbar&quot;&gt;
+ &lt;INPUT TYPE=&quot;button&quot; VALUE=&quot;Back&quot; onClick=&quot;history.back()&quot;&gt;
+ &lt;INPUT TYPE=&quot;button&quot; VALUE=&quot;JS- Home&quot; onClick=&quot;location='script.htm'&quot;&gt;
+ &lt;INPUT TYPE=&quot;button&quot; VALUE=&quot;Next&quot; onCLick=&quot;history.forward()&quot;&gt;
+ &lt;/FORM&gt;
+ &lt;/body&gt;
+ &lt;/html&gt;
+</font></pre>
+ 
+<p><font face="MS Sans Serif" size="1">Você pode escrever também <i>history.go(-1)</i> e
+<i>history.go(1)</i>. </font></p>
+ 
+<p>&nbsp;</p>
+ 
+<h4 align="center"><font face="MS Sans Serif" size="1"><a href="index.htm"
+ onMouseOver="stat('Introdução ao JavaScript - Pagina Principal');return true">Index</a>
+ - <a href="javascr.htm"
+ onMouseOver="stat('JavaScript - Introdução Parte 1');
+ return true">Parte 1</a> - <a
+ href="javascr2.htm" onMouseOver="stat('JavaScript - Introdução Parte 2');
+ return true">Parte
+ 2</a> - <a href="javascr3.htm"
+ onMouseOver="stat('JavaScript - Introdução Parte 3');
+ return true">Parte 3</a> - <a
+ href="javascr4.htm" onMouseOver="stat('JavaScript - Introdução Parte 4');
+ return true">Parte
+ 4</a> - <a href="javascr6.htm"
+ onMouseOver="stat('JavaScript - Introdução Parte 6');
+ return true">Parte 6</a> - <a
+ href="javascr7.htm" onMouseOver="stat('JavaScript - Introdução Parte 7');
+ return true">Parte
+ 7</a> </font></h4>
+</body>
+</html>
+ 
+

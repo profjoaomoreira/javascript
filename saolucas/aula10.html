@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<title>Aula Lampada JS</title>
+		<style>
+			body { background-color: #000;}
+			#img1 {display: block; margin:20px auto;}
+		</style>
+		<script type="text/javascript">
+			function ligar(){
+				document.getElementById("img1").src = "img/on.png";
+			}
+			
+			function desligar(){
+				document.getElementById("img1").src = "img/off.png";
+			}
+		</script>
+	</head>
+	<body>
+		<img id="img1" onclick = "ligar()" ondblclick = "desligar()" src="img/off.png"/>
+		<img id="xti" onclick = "ligar()" src="img/liga.jpg"/>
+		<img id="xti" onclick = "desligar()" src="img/desliga.jpg"/>
+		
+	</body>
+</html>
